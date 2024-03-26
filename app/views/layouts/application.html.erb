@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookers2</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <script src="https://kit.fontawesome.com/f61b6e8d11.js" crossorigin="anonymous"></script>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+ <body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+      <a class="navbar-brand" href="/"><span>Bookers</span></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav ml-auto"><!--"ml-auto"は、左側の余白（マージン）を自動的に設定し、リスト（ナビゲーション項目）を右側に配置する-->
+    <% if user_signed_in? %>
+      <li>
+        <%= link_to "<i class='fa-solid fa-home'></i> Home".html_safe, user_path(current_user.id), class: "nav-link text-light" %>
+      </li>
+      <li>
+        <%= link_to "<i class='fa-solid fa-users'></i> Users".html_safe, users_path, class: "nav-link text-light" %>
+      </li>
+      <li>
+        <%= link_to "<i class='fa-solid fa-book-open'></i> Books".html_safe, books_path, class: "nav-link text-light" %>
+      </li>
+      <li>
+        <%= link_to "<i class='fa-solid fa-sign-out-alt'></i> Log out".html_safe, destroy_user_session_path, method: :delete, class: "nav-link text-light" %>
+      </li>
+    <% else %>
+      <li><a class="nav-link text-light" href="/"><i class="fa-solid fa-home"></i> Home</a></li>
+      <li><a class="nav-link text-light" href="/home/about"><i class="fa-solid fa-link"></i> About</a></li>
+      <li>
+        <%= link_to "<i class='fa-solid fa-user-plus'></i> Sign up".html_safe, new_user_registration_path, class: "nav-link text-light" %>
+      </li>
+      <li>
+        <%= link_to "<i class='fa-solid fa-sign-in-alt'></i> Log in".html_safe, new_user_session_path, class: "nav-link text-light" %>
+      </li>
+    <% end %>
+  </header>  <%= yield %>
+  <footer>
+    <div class="container md">
+  	  <div class="row">
+      <div class="mx-auto"><!--"mx-auto"は左右の余白を自動的に設定し、要素を水平方向に中央に配置する-->
+      <br>
+      <p>CopyRight Infratop.inc</p>
+    </div>
+  </footer>
+ </body>
+</html>
